@@ -28,7 +28,7 @@ public class main {
 			System.out.println("Succsee");
 			statement = conn.createStatement();
 			// delay query executions
-			//Thread.sleep(10000);
+			Thread.sleep(10000);
 			// most given reviews (rate by stars)
 			//resultSet = statement.executeQuery("SELECT stars, COUNT(stars) AS star_occurrence FROM review GROUP BY stars DESC LIMIT 1;");
 			//String mostStar = resultSet.getString(1);
