@@ -3,20 +3,20 @@
 import json, csv, time, os, itertools
 from itertools import islice, chain
 
-ts = '2015-01'
+ts = '2016-11'
 try:
-    os.remove('github/tmp/' + ts + '.tmp.json')
-    os.remove('github/csv/' + ts + '.csv')
+    os.remove('tmp/' + ts + '.tmp.json')
+    os.remove('csv/' + ts + '.csv')
 except Exception as e:
     print e
 
-tmp = open('github/tmp/' + ts + '.tmp.json', 'wb+')
+tmp = open('tmp/' + ts + '.tmp.json', 'wb+')
 tmp.write('[')
 
 dummy = 0
 counter = 0
 max_len = 0
-with open('github/json/' + ts + '.json') as f:
+with open('json/' + ts + '.json') as f:
     for line in f:
         obj = json.loads(line)
         # print obj['created_at'], obj['id'], obj['repo'], obj['type'], obj['public']
@@ -56,8 +56,8 @@ tmp.write(']')
 f.close()
 tmp.close()
 
-tmp = open('github/tmp/' + ts + '.tmp.json', 'r')
-csv_file = open('github/csv/' + ts + '.csv', 'w')
+tmp = open('tmp/' + ts + '.tmp.json', 'r')
+csv_file = open('csv/' + ts + '.csv', 'w')
 objs_parsed = json.loads(tmp.read())
 writer = csv.writer(csv_file)
 count = 0
