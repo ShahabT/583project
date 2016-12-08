@@ -43,7 +43,7 @@ public class client {
      Connection conn = null;
      String[] sqls = { 
       "SELECT * FROM output ", 
-      "SELECT * FROM output WHERE user_email like '%.com'",
+      "SELECT * FROM output WHERE MOD(id, 173) = 0", 
       "SELECT * FROM output WHERE user_email like '%.edu'"
      };
      for (int k = 0; k < sqls.length; k++) 
