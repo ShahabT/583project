@@ -1,21 +1,14 @@
-package test;
+package benchmark.yelp_new;
 
-import java.io.Closeable;
-import java.lang.reflect.WildcardType;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import javax.swing.text.ElementIterator;
-
-import com.mysql.jdbc.DatabaseMetaData;
-
 
 public class main {
 
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;

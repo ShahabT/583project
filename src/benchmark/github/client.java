@@ -1,3 +1,5 @@
+package benchmark.github;
+
 import java.sql.*;
 
 public class client {
