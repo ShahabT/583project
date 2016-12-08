@@ -37,7 +37,7 @@ public class main {
 			//String mostStarCount = resultSet.getString(2);
 			//System.out.println(mostStarCount);
 			// users with most review counts
-			resultSet = statement.executeQuery("SELECT name, review_count FROM user WHERE review_count = (SELECT MAX(review_count) FROM user);");
+			resultSet = statement.executeQuery("SELECT name, review_count FROM business WHERE review_count = (SELECT MAX(review_count) FROM business);");
 			while(resultSet.next()){
 			String mostReviewUser = resultSet.getString(1);
 			System.out.println(mostReviewUser);
@@ -51,7 +51,7 @@ public class main {
 			}
 			System.out.println(topUsers);
 			// users getting most likes of their tips
-			resultSet = statement.executeQuery("SELECT name, MAX(likes) FROM user INNER JOIN tip on user.user_id = tip.user_id");
+			resultSet = statement.executeQuery("SELECT name, likes FROM user INNER JOIN tip on user.user_id = tip.user_id WHERE likes = (SELECT MAX(likes) from user INNER JOIN tip on user.user_id = tip.user_id)");
 			while(resultSet.next()){
 			String mostLikedUser = resultSet.getString(1);
 			System.out.println(mostLikedUser);
