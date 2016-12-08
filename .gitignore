@@ -1,3 +1,4 @@
+*.csv
 #intellij
 .idea
 *.iml
