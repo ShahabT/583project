@@ -30,14 +30,14 @@ public class main {
 			// delay query executions
 			Thread.sleep(10000);
 			// most given reviews (rate by stars)
-			resultSet = statement.executeQuery("SELECT stars, COUNT(stars) AS star_occurrence FROM review GROUP BY stars DESC LIMIT 1;");
-			String mostStar = resultSet.getString(1);
-			System.out.println(mostStar);
+			//resultSet = statement.executeQuery("SELECT stars, COUNT(stars) AS star_occurrence FROM review GROUP BY stars DESC LIMIT 1;");
+			//String mostStar = resultSet.getString(1);
+			//System.out.println(mostStar);
 			// number of businesses with highest ratings
-			String mostStarCount = resultSet.getString(2);
-			System.out.println(mostStarCount);
+			//String mostStarCount = resultSet.getString(2);
+			//System.out.println(mostStarCount);
 			// users with most review counts
-			resultSet = statement.executeQuery("SELECT name, MAX(review_count) FROM user;");
+			resultSet = statement.executeQuery("SELECT name, review_count FROM user WHERE review_count = (SELECT MAX(review_count) FROM user);");
 			String mostReviewUser = resultSet.getString(1);
 			System.out.println(mostReviewUser);
 			// top 10 users with most fans
@@ -52,6 +52,10 @@ public class main {
 			resultSet = statement.executeQuery("SELECT name, MAX(likes) FROM user INNER JOIN tip on user.user_id = tip.user_id");
 			String mostLikedUser = resultSet.getString(1);
 			System.out.println(mostLikedUser);
+			// business with highest rating
+			resultSet = statement.executeQuery("SELECT name FROM business ORDER BY stars DESC LIMIT 1;");
+			String mostLikedBusiness = resultSet.getString(1);
+			System.out.println(mostLikedBusiness);
 			/*
 			while(resultSet.next()){
 				String id = resultSet.getString(1);

@@ -6,4 +6,9 @@ CREATE table if not exists business(business_id VARCHAR(32), full_address VARCHA
 CREATE table if not exists review(votes VARCHAR(60), user_id VARCHAR(30), review_id VARCHAR(30), stars VARCHAR(10), date VARCHAR(20), text VARCHAR(6000), type VARCHAR(10), business_id VARCHAR(32));
 CREATE table if not exists tip(user_id VARCHAR(30), text VARCHAR(6000), business_id VARCHAR(32), likes VARCHAR(10), date VARCHAR(20), type VARCHAR(10));
 CREATE table if not exists user(yelp_since VARCHAR(10), votes VARCHAR(60), review_count VARCHAR(10), name VARCHAR(1024), user_id VARCHAR(30), friends VARCHAR(6000), fans VARCHAR(10), average_stars VARCHAR(10), type VARCHAR(10), compliments VARCHAR(300), elite VARCHAR(20));
-;
+
+LOAD DATA LOCAL INFILE "/Users/Yike/Google Drive/EECS583/project/code/583project/src/benchmark/yelp/yelp/checkin.csv" INTO TABLE checkin COLUMNS TERMINATED BY '@:' LINES TERMINATED BY '\r\n';
+LOAD DATA LOCAL INFILE "/Users/Yike/Google Drive/EECS583/project/code/583project/src/benchmark/yelp/yelp/business.csv" INTO TABLE business COLUMNS TERMINATED BY '@:' LINES TERMINATED BY '\r\n';
+-- LOAD DATA LOCAL INFILE "/Users/Yike/Google Drive/EECS583/project/code/583project/src/benchmark/yelp/yelp/review.csv" INTO TABLE review COLUMNS TERMINATED BY '@:' LINES TERMINATED BY '\r\n';
+-- LOAD DATA LOCAL INFILE "/Users/Yike/Google Drive/EECS583/project/code/583project/src/benchmark/yelp/yelp/tip.csv" INTO TABLE tip COLUMNS TERMINATED BY '@:' LINES TERMINATED BY '\r\n';
+LOAD DATA LOCAL INFILE "/Users/Yike/Google Drive/EECS583/project/code/583project/src/benchmark/yelp/yelp/user.csv" INTO TABLE user COLUMNS TERMINATED BY '@:' LINES TERMINATED BY '\r\n';
