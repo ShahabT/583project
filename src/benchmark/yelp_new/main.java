@@ -1,4 +1,4 @@
-package yelp_new;
+package test;
 
 import java.io.Closeable;
 import java.lang.reflect.WildcardType;
@@ -10,8 +10,7 @@ import java.sql.Statement;
 import javax.swing.text.ElementIterator;
 
 import com.mysql.jdbc.DatabaseMetaData;
-// reedit to the correct path
-import ../../queryManager/QueryExecutor;
+import test.QueryExecutor;
 public class main {
 
 	public static void main(String[] args) throws Exception {
