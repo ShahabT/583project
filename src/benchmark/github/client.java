@@ -1,5 +1,6 @@
 package benchmark.github;
 
+import queryManager.QueryExecutor;
 import java.sql.*;
 
 public class client {
@@ -11,51 +12,23 @@ public class client {
    static final String USER = "user";
    static final String PASS = "password";
 
-   public static Connection getConn()
-   {
-     Connection conn = null;
-     try {
-       Class.forName(JDBC_DRIVER);
-       System.out.println("Connecting to db...");
-       conn = DriverManager.getConnection(DB_URL, USER, PASS); 
-       return conn;
-     } catch(Exception e) {
-        //Handle errors for Class.forName
-        e.printStackTrace();
-     }
-     return null;
-   }
-
-   public static ResultSet execSql(Connection conn, String sql) 
-   {
-     Statement stm = null;
-     ResultSet rs = null;
-     try {
-       stm = conn.createStatement();
-       rs = stm.executeQuery(sql);
-       return rs;
-      } catch (SQLException se){
-        //Handle errors for JDBC
-        se.printStackTrace();
-      } 
-      return null;
-   }
-
-   public static void main(String[] args) {
-     Connection conn = null;
+   public static void main(String[] args) throws Exception{
+     QueryExecutor executor = null;
      String[] sqls = { 
       "SELECT * FROM output ", 
       "SELECT * FROM output WHERE MOD(id, 173) = 0", 
-      "SELECT * FROM output WHERE user_email like '%.edu'"
+      "SELECT * FROM output WHERE user_email like '%.edu'",
+      "SELECT * FROM output WHERE TIME_TO_SEC(time(created_at)) - TIME_TO_SEC(time(now())) > 0",
+      "SELECT HOUR(created_at), COUNT(*) FROM output GROUP BY HOUR(created_at)"
      };
-     for (int k = 0; k < sqls.length; k++) 
-     {
+
+     for (int k = 0; k < sqls.length; k++) {
        try {
-         conn = getConn();
+         executor = QueryExecutor.getInstance(DB_URL, USER, PASS);
          System.out.println("Executing statement: " + sqls[k]);
 
          long startTime = System.currentTimeMillis();
-         ResultSet rs = execSql(conn, sqls[k]);
+         ResultSet rs = executor.executeQuery(sqls[k]);
          long estimatedTime = System.currentTimeMillis() - startTime;
          ResultSetMetaData rsmd = rs.getMetaData();
          int colNum = rsmd.getColumnCount();
@@ -70,21 +43,14 @@ public class client {
            counter++;
            // System.out.println();
          }
-
          System.out.println("Time: " + estimatedTime + " ms");
 
-         rs.close();
-         conn.close();
+         if (k < sqls.length)
+           Thread.sleep(10000);
+
         } catch (SQLException se) {
           se.printStackTrace();
-        } finally {
-          try{
-             if(conn!=null)
-                conn.close();
-          } catch(SQLException se) {
-             se.printStackTrace();
-          }
-        }
+        } 
      }
    }
 }
