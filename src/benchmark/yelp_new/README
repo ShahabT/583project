@@ -1,4 +1,6 @@
 Download yelp dataset from:
 https://drive.google.com/open?id=0B1xH3iQx7CxcakhkUzkxSjM1S2c
 
+Reedit line 13 of main.java to the correct path.
+
 Run run.sh and it will take care of everything.
