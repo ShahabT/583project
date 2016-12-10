@@ -5,7 +5,7 @@ import queryManager.QueryExecutor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SampleApp {
+public class Main {
     public static void main(String[] args) throws InterruptedException {
         QueryExecutor executor;
         try {

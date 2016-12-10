@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import queryManager.QueryExecutor;
 
 
-public class main {
+public class Main {
 
     public static void main(String[] args) throws Exception {
         int wait = args.length > 0 ? Integer.parseInt(args[0]) : 10000;
