@@ -11,7 +11,7 @@ echo
 echo
 
 export SQL_PROFILING=PROFILE
-java -cp mysql-connector.jar:./src $2
+java -cp mysql-connector.jar:./src $2 10
 export SQL_PROFILING=
 
 
@@ -27,4 +27,8 @@ echo "           ####### RUNNING WITH PREFETCH #######           "
 echo
 echo
 
-java -cp mysql-connector.jar:./src $2
+java -cp mysql-connector.jar:./src $2 $3
+
+
+# putting the original one back
+cp src/queryManager/QueryPrefetcher.java.empty src/queryManager/QueryPrefetcher.java

@@ -28,7 +28,7 @@ public abstract class Scheduler {
 
             buf = new StringBuilder();
             while (sc.hasNext())
-                buf.append(sc.nextLine());
+                buf.append(sc.nextLine()).append("\n");
 
             String code = buf.toString()
                     .replace("/* #QUERY_COUNT# */", queries.length+"")
