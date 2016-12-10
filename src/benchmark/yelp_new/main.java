@@ -11,12 +11,11 @@ public class main {
         int wait = args.length > 0 ? Integer.parseInt(args[0]) : 10000;
 
         ResultSet resultSet = null;
-        String database = "583a";
         String usrname = "root";
-        String passwrd = "19920930";
+        String passwrd = "password";
         QueryExecutor executor = null;
         try {
-            executor = QueryExecutor.getInstance("jdbc:mysql://localhost:3306/" + database, usrname, passwrd);
+            executor = QueryExecutor.getInstance("jdbc:mysql://bigdata.eecs.umich.edu/583proj", usrname, passwrd);
 //			System.out.println("Succsee");
 //			statement = conn.createStatement();
             // delay query executions

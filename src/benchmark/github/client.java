@@ -7,7 +7,7 @@ import java.sql.*;
 public class client {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/github";
+    static final String DB_URL = "jdbc:mysql://bigdata.eecs.umich.edu/583proj";
 
     //  Database credentials
     static final String USER = "user";

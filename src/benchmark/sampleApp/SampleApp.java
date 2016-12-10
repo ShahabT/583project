@@ -9,7 +9,7 @@ public class SampleApp {
     public static void main(String[] args) throws InterruptedException {
         QueryExecutor executor;
         try {
-            executor = QueryExecutor.getInstance("jdbc:mysql://localhost:3306/testdb", "root", "darchin");
+            executor = QueryExecutor.getInstance("jdbc:mysql://bigdata.eecs.umich.edu/583proj", "root", "password");
         } catch (Exception e) {
             e.printStackTrace();
             return;
