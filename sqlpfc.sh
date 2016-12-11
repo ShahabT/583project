@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## USAGE: sqlpfc.sh <benchmark name> <pause in ms>
+## USAGE: sqlpfc.sh <benchmark name> <pause in ms> <condition> [run]
 
 echo "           ####### REGULAR COMPILING #######           "
 
@@ -13,7 +13,7 @@ echo
 echo
 
 export SQL_PROFILING=PROFILE
-java -cp mysql-connector.jar:./src benchmark.$1.Main 10 $3
+./run.sh $1 1 $3
 export SQL_PROFILING=
 
 
@@ -24,13 +24,14 @@ echo "           ####### COMPILING WITH PREFETCH #######           "
 javac -cp mysql-connector.jar:./src src/queryManager/*.java src/benchmark/$1/*.java
 
 
+# putting the original one back
+cp src/queryManager/QueryPrefetcher.java.empty src/queryManager/QueryPrefetcher.java
+
+if [ $# -lt 4 ]; then exit 0; fi
+
 echo
 echo "           ####### RUNNING WITH PREFETCH #######           "
 echo
 echo
 
-java -cp mysql-connector.jar:./src benchmark.$1.Main $2 $3
-
-
-# putting the original one back
-cp src/queryManager/QueryPrefetcher.java.empty src/queryManager/QueryPrefetcher.java
+./run.sh $1 $2 $3
