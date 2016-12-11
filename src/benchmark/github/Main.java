@@ -15,16 +15,17 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         long start = System.currentTimeMillis();
+        long maxId = args.length>1 ? Long.parseLong(args[1]):4949797974L;
 
         int wait = args.length > 0 ? Integer.parseInt(args[0]) : 10000;
 
         QueryExecutor executor = null;
         String[] sqls = {
-                "SELECT * FROM output ",
-                "SELECT * FROM output WHERE MOD(id, 173) = 0",
-                "SELECT * FROM output WHERE user_email like '%.edu'",
-                "SELECT * FROM output WHERE TIME_TO_SEC(time(created_at)) - TIME_TO_SEC(time(now())) > 0",
-                "SELECT HOUR(created_at), COUNT(*) FROM output GROUP BY HOUR(created_at)"
+                "SELECT * FROM output where id < "+maxId,
+                "SELECT * FROM output WHERE MOD(id, 173) = 0 and id < "+maxId,
+                "SELECT * FROM output WHERE user_email like '%.edu' and id < "+maxId,
+                "SELECT * FROM output WHERE TIME_TO_SEC(time(created_at)) - TIME_TO_SEC(time(now())) > 0 and id < "+maxId,
+                "SELECT HOUR(created_at), COUNT(*) FROM output GROUP BY HOUR(created_at) and id < "+maxId
         };
 
         try {

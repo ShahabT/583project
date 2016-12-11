@@ -11,6 +11,7 @@ public class Main {
         long start = System.currentTimeMillis();
 
         int wait = args.length > 0 ? Integer.parseInt(args[0]) : 10000;
+        String maxDate = args.length > 1 ? args[1] + "-" : "2017-";
 
         ResultSet resultSet = null;
         String usrname = "root";
@@ -25,9 +26,9 @@ public class Main {
 
             long qStart = System.currentTimeMillis();
             // most given reviews (rate by stars)
-            resultSet = executor.executeQuery("SELECT stars, COUNT(stars) AS star_occurrence FROM review GROUP BY stars DESC LIMIT 1;");
+            resultSet = executor.executeQuery("SELECT stars, COUNT(stars) AS star_occurrence FROM review where date between '2004-' and '" + maxDate + "' GROUP BY stars DESC LIMIT 1;");
             long qEnd = System.currentTimeMillis();
-            System.out.println(">>> Q1 TIME: "+(qEnd-qStart));
+            System.out.println(">>> Q1 TIME: " + (qEnd - qStart));
             while (resultSet.next()) {
                 String mostStar = resultSet.getString(1);
                 System.out.println(mostStar);
@@ -42,7 +43,7 @@ public class Main {
             // users with most review counts
             resultSet = executor.executeQuery("SELECT name, review_count FROM business WHERE review_count = (SELECT MAX(review_count) FROM business);");
             qEnd = System.currentTimeMillis();
-            System.out.println(">>> Q2 TIME: "+(qEnd-qStart));
+            System.out.println(">>> Q2 TIME: " + (qEnd - qStart));
             while (resultSet.next()) {
                 String mostReviewUser = resultSet.getString(1);
                 System.out.println(mostReviewUser);
@@ -55,7 +56,7 @@ public class Main {
             resultSet = executor.executeQuery("SELECT name FROM user ORDER BY fans DESC LIMIT 10;");
             String[] topUsers = new String[10];
             qEnd = System.currentTimeMillis();
-            System.out.println(">>> Q3 TIME: "+(qEnd-qStart));
+            System.out.println(">>> Q3 TIME: " + (qEnd - qStart));
             int i = 0;
             while (resultSet.next()) {
                 topUsers[i++] = resultSet.getObject(1).toString();
@@ -70,7 +71,7 @@ public class Main {
             //resultSet = statement.executeQuery("SELECT name, likes FROM (INNER JOIN tip on user.user_id = tip.user_id WHERE likes = (SELECT MAX(likes) from user_tip)");
             resultSet = executor.executeQuery("SELECT user_tip.name, MAX(user_tip.likes) FROM (SELECT name, likes FROM user INNER JOIN tip on user.user_id = tip.user_id) AS user_tip GROUP BY user_tip.name;");
             qEnd = System.currentTimeMillis();
-            System.out.println(">>> Q4 TIME: "+(qEnd-qStart));
+            System.out.println(">>> Q4 TIME: " + (qEnd - qStart));
             while (resultSet.next()) {
                 String mostLikedUser = resultSet.getString(1);
                 System.out.println(mostLikedUser);
@@ -82,7 +83,7 @@ public class Main {
             // business with highest rating
             resultSet = executor.executeQuery("SELECT name, stars FROM business ORDER BY stars DESC LIMIT 1;");
             qEnd = System.currentTimeMillis();
-            System.out.println(">>> Q5 TIME: "+(qEnd-qStart));
+            System.out.println(">>> Q5 TIME: " + (qEnd - qStart));
             while (resultSet.next()) {
                 String mostLikedBusiness = resultSet.getString(1);
                 System.out.println(mostLikedBusiness);
@@ -95,7 +96,7 @@ public class Main {
         }
 
         long end = System.currentTimeMillis();
-        System.out.println(">>> RUN TIME: "+(end-start));
+        System.out.println(">>> RUN TIME: " + (end - start));
     }
 
 }
