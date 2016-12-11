@@ -68,7 +68,7 @@ public class Main {
             Thread.sleep(wait);
 
             qStart = System.currentTimeMillis();
-            resultSet = executor.executeQuery("SELECT avg(stars) AS star_avg FROM review where date < '2004' and pk < " + (maxPk * .4));
+            resultSet = executor.executeQuery("SELECT avg(stars) AS star_avg FROM review where pk < " + (maxPk * .4));
             qEnd = System.currentTimeMillis();
             System.out.println("#>>> Q4 TIME: " + (qEnd - qStart));
             while (resultSet.next()) {

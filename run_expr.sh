@@ -13,7 +13,6 @@ echo "######################## EXPR STARTED: $benchmark,  pause: $pause, db size
 ./javac.sh $benchmark
 
 ./restart_mysql.sh $buffer
-sudo sync; sudo sh -c 'echo 3 >/proc/sys/vm/drop_caches'
 
 echo
 echo "           ####### RUNNING ORIGINAL #######           "
@@ -23,7 +22,6 @@ echo
 ./sqlpfc.sh $benchmark $pause $size
 
 ./restart_mysql.sh $buffer
-sudo sync; sudo sh -c 'echo 3 >/proc/sys/vm/drop_caches'
 
 echo
 echo "           ####### RUNNING WITH PREFETCH #######           "

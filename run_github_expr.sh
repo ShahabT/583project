@@ -7,7 +7,7 @@ benchmark=github
 
 echo "size, buffer %, pause %, orig latency, pf latency" >> expr-result/$benchmark
 
-for size in 100 300 500 1000 2000
+for size in 100 300 500 1000
 do
     for buffer_percent in 50 100 200
     do
@@ -18,7 +18,7 @@ do
 
         echo "$size, $buffer_percent, 0, $base_latency, $pf_latency" >> expr-result/$benchmark
 
-        for pause_percent in 20 50 75
+        for pause_percent in 20 50 80
         do
             pause=$(( $base_latency * $pause_percent / ( 100 - $pause_percent) / 5 ))
             for iter in $(seq 1 $iters)
