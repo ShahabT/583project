@@ -13,7 +13,7 @@ echo
 echo
 
 export SQL_PROFILING=PROFILE
-java -cp mysql-connector.jar:./src benchmark.$1.Main 10
+java -cp mysql-connector.jar:./src benchmark.$1.Main 10 $3
 export SQL_PROFILING=
 
 
@@ -29,7 +29,7 @@ echo "           ####### RUNNING WITH PREFETCH #######           "
 echo
 echo
 
-java -cp mysql-connector.jar:./src benchmark.$1.Main $2
+java -cp mysql-connector.jar:./src benchmark.$1.Main $2 $3
 
 
 # putting the original one back

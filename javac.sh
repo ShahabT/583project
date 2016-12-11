@@ -12,4 +12,4 @@ echo "           ####### RUNNING ORIGINAL #######           "
 echo
 echo
 
-java -cp mysql-connector.jar:./src benchmark.$1.Main $2
+java -cp mysql-connector.jar:./src benchmark.$1.Main $2 $3
