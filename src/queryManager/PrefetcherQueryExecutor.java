@@ -20,7 +20,7 @@ public class PrefetcherQueryExecutor extends QueryExecutor {
     public ResultSet executeQuery(String sql) throws SQLException {
         sql = sql.replace('\n', ' ').replace('\r', ' ');
 
-        System.out.println("RECEIVED QUERY: "+sql);
+        System.out.println("### RECEIVED QUERY: "+sql);
 
         if(prefetcher.isAlive())
             prefetcher.pause(sql);

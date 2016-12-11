@@ -16,7 +16,7 @@ public class ProfilerQueryExecutor extends QueryExecutor {
     public ResultSet executeQuery(String sql) throws SQLException {
         sql = sql.replace('\n', ' ').replace('\r', ' ');
 
-        System.out.println("PROFILING QUERY: "+sql);
+        System.out.println("### PROFILING QUERY: "+sql);
 
         QueryProfile profile = new QueryProfile(sql, System.currentTimeMillis());
         ResultSet result = statement.executeQuery(sql);
@@ -31,7 +31,7 @@ public class ProfilerQueryExecutor extends QueryExecutor {
 
     @Override
     public void close() throws SQLException {
-        System.out.println("GENERATING PREFETCH SCHEDULE...");
+        System.out.println("### GENERATING PREFETCH SCHEDULE...");
 
         Scheduler sch = new SimpleScheduler(log);
         sch.dumpSchedule("src/queryManager/QueryPrefetcher.java.template", "src/queryManager/QueryPrefetcher.java");

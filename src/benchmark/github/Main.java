@@ -36,7 +36,7 @@ public class Main {
                 long qStart = System.currentTimeMillis();
                 ResultSet rs = executor.executeQuery(sqls[k]);
                 long qEnd = System.currentTimeMillis();
-                System.out.println(">>> Q" + (k + 1) + " TIME: " + (qEnd - qStart));
+                System.out.println("#>>> Q" + (k + 1) + " TIME: " + (qEnd - qStart));
 
                 ResultSetMetaData rsmd = rs.getMetaData();
                 int colNum = rsmd.getColumnCount();
@@ -61,6 +61,6 @@ public class Main {
         }
 
         long end = System.currentTimeMillis();
-        System.out.println(">>> RUN TIME: "+(end-start));
+        System.out.println("#>>> RUN TIME: "+(end-start));
     }
 }

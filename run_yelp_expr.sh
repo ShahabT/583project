@@ -8,7 +8,9 @@ do
     do
         for buffer in 100 200 400 700 1000 2000
         do
-            ./run.sh yelp $pause $condition $buffer
+            for iter in 1 2 3
+                do ./run.sh yelp $pause $condition $buffer
+            done
         done
     done
 done
