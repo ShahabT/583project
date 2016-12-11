@@ -2,12 +2,12 @@
 
 ## USAGE: sudo run_yelp_expr.sh
 
-iters=1
+iters=2
 benchmark=yelp
 
 echo "size, buffer %, pause %, orig latency, pf latency" >> expr-result/$benchmark
 
-for size in 300 500 1000
+for size in 300 500 1000 2000
 do
     for buffer_percent in 50 100 200
     do
@@ -24,6 +24,9 @@ do
             for iter in $(seq 1 $iters)
             do
                 ./run_expr.sh $benchmark $size $buffer_percent $pause
+
+                base_latency=$(tail -n 1 expr-result/base-$benchmark-$size-$buffer_percent-1 | cut -d ' ' -f 4)
+                pf_latency=$(tail -n 1 expr-result/pf-$benchmark-$size-$buffer_percent-1 | cut -d ' ' -f 4)
                 echo "$size, $buffer_percent, $pause_percent, $base_latency, $pf_latency" >> expr-result/$benchmark
             done
         done
