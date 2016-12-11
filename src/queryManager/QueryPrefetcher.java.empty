@@ -21,7 +21,7 @@ class QueryPrefetcher extends Thread {
         }
 
         public void run() {
-                System.out.println("PREFETCHING STARTED");
+                System.out.println("### PREFETCHING STARTED");
                 while (true) {
                         if(statement==null)
                                 break;
@@ -30,7 +30,7 @@ class QueryPrefetcher extends Thread {
                         try {
                                 sql = queue.take();
                         } catch (InterruptedException e) {
-                                System.out.println("PREFETCHER INTRUPTED");
+                                System.out.println("### PREFETCHER INTRUPTED");
                                 break;
                         }
 
@@ -39,10 +39,10 @@ class QueryPrefetcher extends Thread {
                         }
 
                         try {
-                                System.out.println("PREFETCHING QUERY: " + sql);
+                                System.out.println("### PREFETCHING QUERY: " + sql);
                                 this.statement.executeQuery(sql);
                         } catch (SQLException e) {
-                                System.out.println("ERROR IN PREFETCHED QUERY...");
+                                System.out.println("### ERROR IN PREFETCHED QUERY...");
                                 e.printStackTrace();
                         }
 
@@ -54,7 +54,7 @@ class QueryPrefetcher extends Thread {
                                 }
                         }
                 }
-                System.out.println("PREFETCHING ENDED");
+                System.out.println("### PREFETCHING ENDED");
         }
 
         public void pause(String executed) {
