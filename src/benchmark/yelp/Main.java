@@ -69,7 +69,7 @@ public class Main {
             // users getting most likes of their tips
             //resultSet = statement.executeQuery("CREATE TABLE user_tip AS INNER JOIN tip on user.user_id = tip.user_id");
             //resultSet = statement.executeQuery("SELECT name, likes FROM (INNER JOIN tip on user.user_id = tip.user_id WHERE likes = (SELECT MAX(likes) from user_tip)");
-            resultSet = executor.executeQuery("SELECT user_tip.name, MAX(user_tip.likes) FROM (SELECT name, likes FROM user INNER JOIN tip on user.user_id = tip.user_id) AS user_tip GROUP BY user_tip.name;");
+            resultSet = executor.executeQuery("SELECT avg(stars) AS star_avg FROM review where date between '2004-' and '" + maxDate + "';");
             qEnd = System.currentTimeMillis();
             System.out.println(">>> Q4 TIME: " + (qEnd - qStart));
             while (resultSet.next()) {

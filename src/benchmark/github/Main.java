@@ -31,12 +31,12 @@ public class Main {
         try {
             executor = QueryExecutor.getInstance(DB_URL, USER, PASS);
             for (int k = 0; k < sqls.length; k++) {
-
+                Thread.sleep(wait);
 
                 long qStart = System.currentTimeMillis();
                 ResultSet rs = executor.executeQuery(sqls[k]);
                 long qEnd = System.currentTimeMillis();
-                System.out.println(">>> Q"+(k+1)+" TIME: "+(qEnd-qStart));
+                System.out.println(">>> Q" + (k + 1) + " TIME: " + (qEnd - qStart));
 
                 ResultSetMetaData rsmd = rs.getMetaData();
                 int colNum = rsmd.getColumnCount();
@@ -52,11 +52,7 @@ public class Main {
                     // System.out.println();
                 }
                 System.out.println(counter);
-
-                if (k < sqls.length)
-                    Thread.sleep(10000);
             }
-
         } catch (SQLException se) {
             se.printStackTrace();
         } finally {
