@@ -20,7 +20,7 @@ do
 
         for pause_percent in 20 50 75
         do
-            pause=$(( $latency * $pause_percent / ( 100 - $pause_percent) / 5 ))
+            pause=$(( $base_latency * $pause_percent / ( 100 - $pause_percent) / 5 ))
             for iter in $(seq 1 $iters)
             do
                 ./run_expr.sh $benchmark $size $buffer_percent $pause
