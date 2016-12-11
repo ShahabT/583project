@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## USAGE: sqlpfc.sh <benchmark name> <pause in ms> <condition> [run]
+## USAGE: sqlpfc.sh <benchmark name> <pause in ms> <data size in mb> [run]
 
 echo "           ####### REGULAR COMPILING #######           "
 

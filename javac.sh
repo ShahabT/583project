@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## USAGE: javac.sh <benchmark name> [<pause in ms> <condition>]
+## USAGE: javac.sh <benchmark name> [<pause in ms> <data size in mb>]
 
 echo "           ####### REGULAR COMPILING #######           "
 

@@ -1,15 +1,15 @@
 #!/bin/bash
 
-## USAGE: sudo run_yelp_expr.sh
+## USAGE: sudo run_github_expr.sh
 
-for pause in 1 2000 5000 10000 20000
+for pause in 1 1000 2000 5000 10000
 do
-    for condition in 4820998666 4846758527 4872518388 4898278249 4924038110
+    for size in 100 300 500 1000 2000
     do
-        for buffer in 200 500 1000 2000 3000 4000
+        for buffer in 50 100 500 1000 3000
         do
             for iter in 1 2 3
-                do ./run.sh yelp $pause $condition $buffer
+                do ./run.sh github $pause $size $buffer
             done
         done
     done

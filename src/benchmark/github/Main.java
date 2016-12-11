@@ -15,17 +15,19 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         long start = System.currentTimeMillis();
-        long maxId = args.length>1 ? Long.parseLong(args[1]):4949797974L;
+        int tableSize=4027, lastPk=29764052;
+        int size = args.length>1 ? Integer.parseInt(args[1]):tableSize;
+        long maxPk = (int)(lastPk*((double)size)/tableSize);
 
         int wait = args.length > 0 ? Integer.parseInt(args[0]) : 10000;
 
         QueryExecutor executor = null;
         String[] sqls = {
-                "SELECT * FROM github where id < "+maxId,
-                "SELECT * FROM github WHERE MOD(id, 173) = 0 and id < "+maxId,
-                "SELECT * FROM github WHERE user_email like '%.edu' and id < "+maxId,
-                "SELECT * FROM github WHERE TIME_TO_SEC(time(created_at)) - TIME_TO_SEC(time(now())) > 0 and id < "+maxId,
-                "SELECT HOUR(created_at), COUNT(*) FROM github GROUP BY HOUR(created_at) and id < "+maxId
+                "SELECT * FROM github where pk < "+(maxPk*0.01),
+                "SELECT max(user) FROM github WHERE MOD(id, 173) = 0 and pk between "+(maxPk*.3)+" and "+(maxPk*.5),
+                "SELECT org, count(*) FROM github WHERE user_email like '%.edu' and pk between "+(maxPk*.7)+" and "+(maxPk*.75)+" group by org",
+                "SELECT type, count(distinct user) FROM github WHERE TIME_TO_SEC(time(created_at)) - TIME_TO_SEC(time('2016-01-01')) > 0 and pk between "+(maxPk*.8) + " and "+ maxPk,
+                "SELECT HOUR(created_at), COUNT(*) FROM github GROUP BY HOUR(created_at) and pk < "+maxPk
         };
 
         try {

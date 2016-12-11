@@ -11,7 +11,10 @@ public class Main {
         long start = System.currentTimeMillis(), qStart, qEnd;
 
         int wait = args.length > 0 ? Integer.parseInt(args[0]) : 10000;
-        String maxDate = args.length > 1 ? args[1] + "-" : "2017-";
+
+        int tableSize=2417, lastPk=9028133;
+        int size = args.length>1 ? Integer.parseInt(args[1])-187-74:tableSize;
+        long maxPk = (int)(lastPk*((double)size)/tableSize);
 
         ResultSet resultSet = null;
         String usrname = "root";
@@ -65,7 +68,7 @@ public class Main {
             Thread.sleep(wait);
 
             qStart = System.currentTimeMillis();
-            resultSet = executor.executeQuery("SELECT avg(stars) AS star_avg FROM review where date between '2004-' and '" + maxDate + "';");
+            resultSet = executor.executeQuery("SELECT avg(stars) AS star_avg FROM review where date ? '2004' and pk < "+maxPk*.4);
             qEnd = System.currentTimeMillis();
             System.out.println("#>>> Q4 TIME: " + (qEnd - qStart));
             while (resultSet.next()) {
@@ -77,7 +80,7 @@ public class Main {
 
             qStart = System.currentTimeMillis();
             // most given reviews (rate by stars)
-            resultSet = executor.executeQuery("SELECT stars, COUNT(stars) AS star_occurrence FROM review where date between '2004-' and '" + maxDate + "' GROUP BY stars DESC LIMIT 1;");
+            resultSet = executor.executeQuery("SELECT stars, COUNT(stars) AS star_occurrence FROM review where pk < " + (maxPk*.5) + "' GROUP BY stars DESC LIMIT 1;");
             qEnd = System.currentTimeMillis();
             System.out.println("#>>> Q5 TIME: " + (qEnd - qStart));
             while (resultSet.next()) {
