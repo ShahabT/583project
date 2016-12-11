@@ -14,6 +14,8 @@ public class Main {
     static final String PASS = "password";
 
     public static void main(String[] args) throws Exception {
+        long start = System.currentTimeMillis();
+
         int wait = args.length > 0 ? Integer.parseInt(args[0]) : 10000;
 
         QueryExecutor executor = null;
@@ -28,11 +30,13 @@ public class Main {
         try {
             executor = QueryExecutor.getInstance(DB_URL, USER, PASS);
             for (int k = 0; k < sqls.length; k++) {
-                System.out.println("Executing statement: " + sqls[k]);
 
-                long startTime = System.currentTimeMillis();
+
+                long qStart = System.currentTimeMillis();
                 ResultSet rs = executor.executeQuery(sqls[k]);
-                long estimatedTime = System.currentTimeMillis() - startTime;
+                long qEnd = System.currentTimeMillis();
+                System.out.println(">>> Q"+(k+1)+" TIME: "+(qEnd-qStart));
+
                 ResultSetMetaData rsmd = rs.getMetaData();
                 int colNum = rsmd.getColumnCount();
                 int counter = 0;
@@ -46,7 +50,7 @@ public class Main {
                     counter++;
                     // System.out.println();
                 }
-                System.out.println("Time: " + estimatedTime + " ms");
+                System.out.println(counter);
 
                 if (k < sqls.length)
                     Thread.sleep(10000);
@@ -58,5 +62,8 @@ public class Main {
             if (executor != null)
                 executor.close();
         }
+
+        long end = System.currentTimeMillis();
+        System.out.println(">>> RUN TIME: "+(end-start));
     }
 }
