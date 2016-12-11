@@ -21,11 +21,11 @@ public class Main {
 
         QueryExecutor executor = null;
         String[] sqls = {
-                "SELECT * FROM output where id < "+maxId,
-                "SELECT * FROM output WHERE MOD(id, 173) = 0 and id < "+maxId,
-                "SELECT * FROM output WHERE user_email like '%.edu' and id < "+maxId,
-                "SELECT * FROM output WHERE TIME_TO_SEC(time(created_at)) - TIME_TO_SEC(time(now())) > 0 and id < "+maxId,
-                "SELECT HOUR(created_at), COUNT(*) FROM output GROUP BY HOUR(created_at) and id < "+maxId
+                "SELECT * FROM github where id < "+maxId,
+                "SELECT * FROM github WHERE MOD(id, 173) = 0 and id < "+maxId,
+                "SELECT * FROM github WHERE user_email like '%.edu' and id < "+maxId,
+                "SELECT * FROM github WHERE TIME_TO_SEC(time(created_at)) - TIME_TO_SEC(time(now())) > 0 and id < "+maxId,
+                "SELECT HOUR(created_at), COUNT(*) FROM github GROUP BY HOUR(created_at) and id < "+maxId
         };
 
         try {
@@ -38,8 +38,8 @@ public class Main {
                 long qEnd = System.currentTimeMillis();
                 System.out.println("#>>> Q" + (k + 1) + " TIME: " + (qEnd - qStart));
 
-                ResultSetMetaData rsmd = rs.getMetaData();
-                int colNum = rsmd.getColumnCount();
+//                ResultSetMetaData rsmd = rs.getMetaData();
+//                int colNum = rsmd.getColumnCount();
                 int counter = 0;
 
                 while (rs.next()) {
