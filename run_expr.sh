@@ -1,13 +1,14 @@
 #!/bin/bash
 
-## USAGE: sudo run_expr.sh  <benchmark name> <pause in ms> <data size in mb> <buffer size in MB>
+## USAGE: sudo run_expr.sh  <benchmark name> <data size in mb> <buffer percent> <pause in ms>
 
 benchmark=$1
-pause=$2
-size=$3
-buffer=$4
+size=$2
+buffer_percent=$3
+pause=$4
+buffer=$(( $size * $buffer_percent / 100 ))
 
-echo "######################## EXPR STARTED: $benchmark,  pause: $pause, db size: $size MB, buffer: $buffer MB"
+echo "######################## EXPR STARTED: $benchmark,  pause: $pause, db size: $size MB, buffer: $buffer_percent %"
 
 ./javac.sh $benchmark
 
@@ -17,7 +18,7 @@ sudo sync; sudo sh -c 'echo 3 >/proc/sys/vm/drop_caches'
 echo
 echo "           ####### RUNNING ORIGINAL #######           "
 echo
-./run.sh $benchmark $pause $size | grep "#" | tee -a expr-result/base-$benchmark-$pause-$size-$buffer
+./run.sh $benchmark $pause $size | grep "#" | tee -a expr-result/base-$benchmark-$size-$buffer_percent-$pause
 
 ./sqlpfc.sh $benchmark $pause $size
 
@@ -27,4 +28,4 @@ sudo sync; sudo sh -c 'echo 3 >/proc/sys/vm/drop_caches'
 echo
 echo "           ####### RUNNING WITH PREFETCH #######           "
 echo
-./run.sh $benchmark $pause $size | grep "#" | tee -a expr-result/pf-$benchmark-$pause-$size-$buffer
+./run.sh $benchmark $pause $size | grep "#" | tee -a expr-result/pf-$benchmark-$size-$buffer_percent-$pause

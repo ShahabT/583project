@@ -27,7 +27,7 @@ public class Main {
                 "SELECT max(user) FROM github WHERE MOD(id, 173) = 0 and pk between " + (maxPk * .1) + " and " + (maxPk * .5),
                 "SELECT org, count(*) FROM github WHERE user_email like '%.edu' and pk between " + (maxPk * .7) + " and " + (maxPk * .9) + " group by org",
                 "SELECT type, count(distinct user) FROM github WHERE TIME_TO_SEC(time(created_at)) - TIME_TO_SEC(time('2016-01-01')) > 0 and pk between " + (maxPk * .8) + " and " + maxPk,
-                "SELECT HOUR(created_at), COUNT(*) FROM github where pk between " + (maxPk * .2) + " and " + (maxPk * .9) +" GROUP BY HOUR(created_at)"
+                "SELECT HOUR(created_at), COUNT(*) FROM github where pk < " + maxPk + " GROUP BY HOUR(created_at)"
         };
 
         try {
