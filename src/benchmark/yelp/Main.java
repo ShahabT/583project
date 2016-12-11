@@ -1,4 +1,4 @@
-package benchmark.yelp_new;
+package benchmark.yelp;
 
 import java.sql.ResultSet;
 
