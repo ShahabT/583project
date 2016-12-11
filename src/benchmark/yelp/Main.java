@@ -80,7 +80,7 @@ public class Main {
 
             qStart = System.currentTimeMillis();
             // most given reviews (rate by stars)
-            resultSet = executor.executeQuery("SELECT stars, COUNT(stars) AS star_occurrence FROM review where pk < " + (maxPk * .5) + "' GROUP BY stars DESC LIMIT 1;");
+            resultSet = executor.executeQuery("SELECT stars, COUNT(stars) AS star_occurrence FROM review where pk < " + (maxPk * .5) + " GROUP BY stars DESC LIMIT 1;");
             qEnd = System.currentTimeMillis();
             System.out.println("#>>> Q5 TIME: " + (qEnd - qStart));
             while (resultSet.next()) {
