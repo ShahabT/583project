@@ -41,29 +41,29 @@ public class Main {
             Thread.sleep(wait);
 
             qStart = System.currentTimeMillis();
+            // business with highest rating
+            resultSet = executor.executeQuery("SELECT name, stars FROM business ORDER BY stars DESC LIMIT 1;");
+            qEnd = System.currentTimeMillis();
+            System.out.println("#>>> Q2 TIME: " + (qEnd - qStart));
+            while (resultSet.next()) {
+                String mostLikedBusiness = resultSet.getString(1);
+                System.out.println(mostLikedBusiness);
+            }
+
+            Thread.sleep(wait);
+
+            qStart = System.currentTimeMillis();
             // top 10 users with most fans
             resultSet = executor.executeQuery("SELECT name FROM user ORDER BY fans DESC LIMIT 10;");
             String[] topUsers = new String[10];
             qEnd = System.currentTimeMillis();
-            System.out.println("#>>> Q2 TIME: " + (qEnd - qStart));
+            System.out.println("#>>> Q3 TIME: " + (qEnd - qStart));
             int i = 0;
             while (resultSet.next()) {
                 topUsers[i++] = resultSet.getObject(1).toString();
                 System.out.println(topUsers);
             }
 
-
-            Thread.sleep(wait);
-
-            qStart = System.currentTimeMillis();
-            // business with highest rating
-            resultSet = executor.executeQuery("SELECT name, stars FROM business ORDER BY stars DESC LIMIT 1;");
-            qEnd = System.currentTimeMillis();
-            System.out.println("#>>> Q3 TIME: " + (qEnd - qStart));
-            while (resultSet.next()) {
-                String mostLikedBusiness = resultSet.getString(1);
-                System.out.println(mostLikedBusiness);
-            }
 
             Thread.sleep(wait);
 
