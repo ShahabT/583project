@@ -11,10 +11,12 @@ public class SmartScheduler extends Scheduler {
     }
 
     public String[] getSchedule() {
-        ArrayList<QueryProfile> runs = new ArrayList<>();
+        ArrayList<QueryProfile> runsList = new ArrayList<>();
         for(ArrayList<QueryProfile> ps: profile.values())
-            runs.addAll(ps);
-        runs.sort(new Comparator<QueryProfile>() {
+            runsList.addAll(ps);
+
+        QueryProfile[] runs = runsList.toArray(new QueryProfile[0]);
+        Arrays.sort(runs, new Comparator<QueryProfile>() {
             @Override
             public int compare(QueryProfile o1, QueryProfile o2) {
                 return (int) (o1.start - o2.start);
