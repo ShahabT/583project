@@ -11,6 +11,7 @@ public class SimpleScheduler extends Scheduler {
     }
 
     public String[] getSchedule() {
+        profile.remove("START");
         String[] queries = profile.keySet().toArray(new String[]{});
         Arrays.sort(queries, new Comparator<String>() {
             @Override

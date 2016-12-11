@@ -13,7 +13,7 @@ echo
 echo
 
 export SQL_PROFILING=PROFILE
-./run.sh $1 1 $3 | grep "###"
+./run.sh $1 $2 $3 | grep "###"
 export SQL_PROFILING=
 
 

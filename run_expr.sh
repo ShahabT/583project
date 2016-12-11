@@ -7,7 +7,7 @@ pause=$2
 size=$3
 buffer=$4
 
-echo "######################## EXPR STARTED: $benchmark  pause: $pause db size: $size buffer: $buffer MB"
+echo "######################## EXPR STARTED: $benchmark,  pause: $pause, db size: $size MB, buffer: $buffer MB"
 
 ./javac.sh $benchmark
 

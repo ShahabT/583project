@@ -10,6 +10,8 @@ public class ProfilerQueryExecutor extends QueryExecutor {
 
     protected ProfilerQueryExecutor(String connectionStr, String username, String password) throws ClassNotFoundException, SQLException {
         super(connectionStr, username, password);
+        log.put("START", new ArrayList<QueryProfile>());
+        log.get("START").add(new QueryProfile("START", System.currentTimeMillis()));
     }
 
     @Override
@@ -33,7 +35,7 @@ public class ProfilerQueryExecutor extends QueryExecutor {
     public void close() throws SQLException {
         System.out.println("### GENERATING PREFETCH SCHEDULE...");
 
-        Scheduler sch = new SimpleScheduler(log);
+        Scheduler sch = new SmartScheduler(log);
         sch.dumpSchedule("src/queryManager/QueryPrefetcher.java.template", "src/queryManager/QueryPrefetcher.java");
         super.close();
     }
