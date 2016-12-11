@@ -14,7 +14,7 @@ do
         ./run_expr.sh $benchmark $size $buffer_percent 1
 
         base_latency=$(tail -n 1 expr-result/base-$benchmark-$size-$buffer_percent-1 | cut -d ' ' -f 4)
-        pf_latency=$(tail -n 1 expr-result/base-$benchmark-$size-$buffer_percent-1 | cut -d ' ' -f 4)
+        pf_latency=$(tail -n 1 expr-result/pf-$benchmark-$size-$buffer_percent-1 | cut -d ' ' -f 4)
 
         echo "$size, $buffer_percent, 0, $base_latency, $pf_latency" >> expr-result/$benchmark
 
