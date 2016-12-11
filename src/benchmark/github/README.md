@@ -11,10 +11,10 @@ mv 2016-11 2016-11.json
 cd ../
 vim parser.py # find ts and change it to 2016-11
 python parser.py
-mv csv/2016-11.csv output.csv
-csvsql --dialect mysql --snifflimit 65534 output.csv > tabledef.sql
+mv csv/2016-11.csv github.csv
+csvsql --dialect mysql --snifflimit 65534 github.csv > tabledef.sql
 cat tabledef.sql # copy and paste this output to mysql console
-mysqlimport --ignore-lines=1 --fields-terminated-by=, --local -u user -p github output.csv 
+mysqlimport --ignore-lines=1 --fields-terminated-by=, --local -u user -p github github.csv
 # password is password
 ```
 

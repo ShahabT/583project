@@ -1,10 +1,10 @@
 #!/bin/bash
 
-## USAGE: sqlpfc.sh src/benchmark/<name>/*.java benchmark.<name>.Main <pause>
+## USAGE: sqlpfc.sh <benchmark name> <pause in ms>
 
 echo "           ####### REGULAR COMPILING #######           "
 
-javac -cp mysql-connector.jar:./src src/queryManager/*.java $1
+javac -cp mysql-connector.jar:./src src/queryManager/*.java src/benchmark/$1/*.java
 
 
 echo
@@ -13,7 +13,7 @@ echo
 echo
 
 export SQL_PROFILING=PROFILE
-java -cp mysql-connector.jar:./src $2 10
+java -cp mysql-connector.jar:./src benchmark.$1.Main 10
 export SQL_PROFILING=
 
 
@@ -21,7 +21,7 @@ echo
 echo
 echo "           ####### COMPILING WITH PREFETCH #######           "
 
-javac -cp mysql-connector.jar:./src src/queryManager/*.java $1
+javac -cp mysql-connector.jar:./src src/queryManager/*.java src/benchmark/$1/*.java
 
 
 echo
@@ -29,7 +29,7 @@ echo "           ####### RUNNING WITH PREFETCH #######           "
 echo
 echo
 
-java -cp mysql-connector.jar:./src $2 $3
+java -cp mysql-connector.jar:./src benchmark.$1.Main $2
 
 
 # putting the original one back

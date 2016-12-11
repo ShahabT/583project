@@ -1,6 +1,6 @@
 user=root
-passwd=19920930
-db=583a
+passwd=password
+db=583proj
 echo "convert data to csv"
 #python parse.py yelp_academic_dataset_business.json business.csv
 #python parse.py yelp_academic_dataset_checkin.json checkin.csv

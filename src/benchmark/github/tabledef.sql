@@ -1,4 +1,4 @@
-CREATE TABLE output (
+CREATE TABLE github (
 	created_at DATETIME NOT NULL, 
 	repo VARCHAR(54) NOT NULL, 
 	user VARCHAR(27) NOT NULL, 

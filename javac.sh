@@ -1,10 +1,10 @@
 #!/bin/bash
 
-## USAGE: javac.sh src/benchmark/<name>/*.java benchmark.<name>.Main <pause>
+## USAGE: javac.sh <benchmark name> <pause in ms>
 
 echo "           ####### REGULAR COMPILING #######           "
 
-javac -cp mysql-connector.jar:./src src/queryManager/*.java $1
+javac -cp mysql-connector.jar:./src src/queryManager/*.java src/benchmark/$1/*.java
 
 
 echo
@@ -12,4 +12,4 @@ echo "           ####### RUNNING ORIGINAL #######           "
 echo
 echo
 
-java -cp mysql-connector.jar:./src $2 $3
+java -cp mysql-connector.jar:./src benchmark.$1.Main $2
