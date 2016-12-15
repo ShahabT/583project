@@ -1,0 +1,11 @@
+\section{Introduction}
+\label{sec:intro}
+First, we analyze the code blocks at compile stage and extract the strings in
+basic blocks that potentially contain queries. With the identified queries, we
+speculate tables that are likely used. And then, we propose to prefetch ``mostly
+likely to be queried" tables to the main memory. We plan to speculatively
+prefetch tables by inserting or moving basic blocks that fetch tables to memory.
+Furthermore, we suspect that applications in similar category are likely to
+utilize same table. This means that by prefetching and caching the table that is
+shared among multiple applications, we remove the bottleneck in traditional
+database systems at compiler optimization domain. 
